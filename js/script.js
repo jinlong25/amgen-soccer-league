@@ -75,6 +75,163 @@ d3.csv(dataUrl).then(function(data) {
 	games.append('td')
 		.attr('class', 'text-left col-5')
 		.html(function(g) { return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>' + g.away; });
+
+
+
+	//Calculate league Table
+	var lt = {};
+
+	//get all teams
+	data.forEach(function(d) {
+		if (!lt.hasOwnProperty(d.home)) {
+			lt[d.home] = {
+				'gp': 0,
+				'gs': 0,
+				'gc': 0,
+				'gd': 0,
+				'pts': 0,
+				'w': 0,
+				'd': 0,
+				'l': 0
+			}
+		}
+		if (!lt.hasOwnProperty(d.away)) {
+			lt[d.away] = {
+				'gp': 0,
+				'gs': 0,
+				'gc': 0,
+				'gd': 0,
+				'pts': 0,
+				'w': 0,
+				'd': 0,
+				'l': 0
+			}
+		}
+	});
+
+	//calculate gs, gc
+	data.forEach(function(d) {
+		//gp, gs, gc
+		if (d.home_goal !== '') {
+			lt[d.home]['gp'] += 1;
+			lt[d.away]['gp'] += 1;
+
+			lt[d.home]['gs'] += parseInt(d.home_goal);
+			lt[d.home]['gc'] += parseInt(d.away_goal);
+
+			lt[d.away]['gs'] += parseInt(d.away_goal);
+			lt[d.away]['gc'] += parseInt(d.home_goal);
+
+			if(parseInt(d.home_goal) > parseInt(d.away_goal)) {
+				lt[d.home]['pts'] += 3;
+				lt[d.home]['w'] += 1;
+				lt[d.away]['l'] += 1;
+			} else if (parseInt(d.home_goal) === parseInt(d.away_goal)) {
+				lt[d.home]['pts'] += 1;
+				lt[d.away]['pts'] += 1;
+				lt[d.home]['d'] += 1;
+				lt[d.away]['d'] += 1;
+			} else if (parseInt(d.home_goal) < parseInt(d.away_goal)) {
+				lt[d.away]['pts'] += 3;
+				lt[d.home]['l'] += 1;
+				lt[d.away]['w'] += 1;
+			}
+		}
+	});
+
+	//calculate gd
+	for (var property in lt) {
+	    if (lt.hasOwnProperty(property)) {
+	        lt[property]['gd'] = parseInt(lt[property]['gs']) - parseInt(lt[property]['gc']);
+	    }
+	}
+	console.log(lt);
+
+	//convert lt to an object array
+	ltData = [];
+	for (var property in lt) {
+			if (lt.hasOwnProperty(property)) {
+				var obj = {
+					'team': property,
+					'gp': lt[property]['gp'],
+					'gs': lt[property]['gs'],
+					'gc': lt[property]['gc'],
+					'gd': lt[property]['gd'],
+					'pts': lt[property]['pts'],
+					'w': lt[property]['w'],
+					'd': lt[property]['d'],
+					'l': lt[property]['l'],
+				}
+				ltData.push(obj);
+			}
+	}
+
+	//sort teams by pts
+	ltData.sort(function(a, b) {
+  	return b.pts - a.pts;
+	});
+	console.log(ltData);
+
+	//populate league table
+	var rows = d3.select('.league-table-tab tbody')
+		.selectAll('tr')
+		.data(ltData)
+		.enter()
+		.append('tr');
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + d.team+ '.png"></span>' + d.team;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.gp;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.w;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.d;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.l;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.gs;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.gc;
+		});
+
+	rows.append('th')
+		.attr('class', 'font-weight-normal')
+		.html(function(d) {
+			return d.gd;
+		});
+
+	rows.append('th')
+		.html(function(d) {
+			return d.pts;
+		});
+
 });
 
 d3.selectAll('.tab-toggle button').on('click', function(d) {
@@ -85,8 +242,10 @@ d3.selectAll('.tab-toggle button').on('click', function(d) {
 
 	if (d3.select(this).classed('game-day')) {
 		d3.select('.game-day-tab').classed('d-none', false);
+		d3.select('.league-table-tab').classed('d-none', true);
 	} else {
 		d3.select('.game-day-tab').classed('d-none', true);
+		d3.select('.league-table-tab').classed('d-none', false);
 	}
 	console.log(d3.select(this).classed('game-day'))
 });
