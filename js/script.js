@@ -10,7 +10,8 @@ d3.csv(dataUrl).then(function(data) {
 
 	var cards = d3.select('#gameResults')
 		.selectAll('div.card')
-		.data(nested.reverse())
+		.data(nested)
+		// .data(nested.reverse())
 		.enter()
 		.append('div')
 		.attr('class', 'card');
@@ -27,17 +28,20 @@ d3.csv(dataUrl).then(function(data) {
 		.attr('type', 'button')
 		.attr('data-toggle', 'collapse')
 		.attr('data-target', function(d, i) {
-			return '#collapseGameDay' + (nested.length - i);
+			// return '#collapseGameDay' + (nested.length - i);
+			return '#collapseGameDay' + (i+1);
 		})
 		.attr('aria-expanded', 'true')
 		.html(function(d, i) {
-			return 'Game Day ' + (nested.length - i) + ' - ' + d.key;
+			// return 'Game Day ' + (nested.length - i) + ' - ' + d.key;
+			return 'Game Day ' + (i+1) + ' - ' + d.key;
 		});
 
 	var cardBodies = cards.append('div')
 		.attr('class', 'collapse show')
 		.attr('id', function(d, i) {
-			return 'collapseGameDay' + (nested.length - i);
+			// return 'collapseGameDay' + (nested.length - i);
+			return 'collapseGameDay' + (i+1);
 		})
 		.append('div')
 		.attr('class', 'card-body text-center')
