@@ -59,7 +59,7 @@ d3.csv(dataUrl).then(function(data) {
 				return 'text-right col-5';
 			}
 		})
-		.html(function(g) { return g.home + '<span><img src="../img/' + g.home + '.png"></span>'; });
+		.html(function(g) { return g.home + '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.home + '.png"></span>'; });
 		
 	
 	games.append('td')
@@ -74,7 +74,7 @@ d3.csv(dataUrl).then(function(data) {
 				return 'text-left col-5';
 			}
 		})
-		.html(function(g) { return '<span><img src="../img/' + g.away + '.png"></span>' + g.away; });
+		.html(function(g) { return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>' + g.away; });
 		
 		// .html(function(d) {
 		// 	d.values.forEach
