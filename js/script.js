@@ -21,14 +21,14 @@ d3.csv(dataUrl).then(function(data) {
 			return 'gameDay' + (nested.length - i);
 		})
 		.append('h5')
-		.attr('class', 'mb-0 text-center')
-		.append('button')
-		.attr('class', 'btn btn-link')
-		.attr('type', 'button')
-		.attr('data-toggle', 'collapse')
-		.attr('data-target', function(d, i) {
-			return '#collapseGameDay' + (nested.length - i);
-		})
+		.attr('class', 'mb-0 text-center text-primary')
+		// .append('button')
+		// .attr('class', 'btn btn-link')
+		// .attr('type', 'button')
+		// .attr('data-toggle', 'collapse')
+		// .attr('data-target', function(d, i) {
+		// 	return '#collapseGameDay' + (nested.length - i);
+		// })
 		.attr('aria-expanded', 'true')
 		.html(function(d, i) {
 			return 'Game Day ' + (nested.length - i) + ' - ' + d.key;
