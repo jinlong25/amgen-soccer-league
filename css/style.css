@@ -1,28 +1,23 @@
-.zoom {
-    fill: transparent;
-    cursor: pointer;
+.navbar {
+    background-color: #0063C3;
+    border-color: #E7E7E7;
 }
 
-.y-axis path,
-.y-axis line,
-.x-axis path,
-.x-axis line,
-{
-    path,
-    line {
-        stroke: black;
-        fill: none;
-        stroke-width: 1px;
-    }
+.navbar-brand {
+  color: #fff;
 }
 
-.y-axis g line {
-    stroke: grey;
-    fill: none;
-    stroke-width: 1px;
+tr {
+  line-height: 40px;
 }
 
-.graph-body .line circle {
-    opacity: 0.1;
+img {
+  border: 0 none;
+  display: inline;
+  height: 40px;
+  vertical-align: middle;
 }
 
+h3 {
+  color: #0063C3;
+}
