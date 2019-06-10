@@ -64,9 +64,6 @@ d3.csv(dataUrl).then(function(data) {
 	games.append('td')
 		.attr('class', 'text-center col-2 font-weight-bold')
 		.html(function(g) {
-			console.log(g.home_goal);
-			console.log(g.time);
-			console.log(g.home_goal === '');
 			if(g.home_goal === '') {
 				return g.time;
 			} else {
@@ -78,4 +75,18 @@ d3.csv(dataUrl).then(function(data) {
 	games.append('td')
 		.attr('class', 'text-left col-5')
 		.html(function(g) { return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>' + g.away; });
+});
+
+d3.selectAll('.tab-toggle button').on('click', function(d) {
+	d3.selectAll('.tab-toggle button').classed('btn-secondary', true);
+	d3.selectAll('.tab-toggle button').classed('btn-primary', false);
+	d3.select(this).classed('btn-secondary', false);
+	d3.select(this).classed('btn-primary', true);
+
+	if (d3.select(this).classed('game-day')) {
+		d3.select('.game-day-tab').classed('d-none', false);
+	} else {
+		d3.select('.game-day-tab').classed('d-none', true);
+	}
+	console.log(d3.select(this).classed('game-day'))
 });
