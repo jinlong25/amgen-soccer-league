@@ -251,3 +251,8 @@ d3.selectAll('.tab-toggle button').on('click', function(d) {
 		d3.select('.league-table-tab').classed('d-none', false);
 	}
 });
+
+//enable tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
