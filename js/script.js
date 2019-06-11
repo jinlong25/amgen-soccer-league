@@ -1,12 +1,16 @@
 var dataUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR9qGeumntFjt6wEd6hgT2ZaLbhhYkfdXBbIx_iriMrVTznvcUP6TT-9PMuZ0GD0uu96q7mX4rup0Xj/pub?gid=0&single=true&output=csv'
 
 d3.csv(dataUrl).then(function(data) {
+	
+	//show hidden components after data return
+	d3.select('.updated').classed('d-none', false);
+	d3.select('.tab-toggle').classed('d-none', false);
+	d3.select('footer').classed('d-none', false);
+	d3.select('.loader').classed('d-none', true);
 
 	var nested = d3.nest()
   	.key(function(d) { return d.date; })
   	.entries(data);
-
-	console.log(nested);
 
 	var cards = d3.select('#gameResults')
 		.selectAll('div.card')
@@ -145,7 +149,6 @@ d3.csv(dataUrl).then(function(data) {
 	        lt[property]['gd'] = parseInt(lt[property]['gs']) - parseInt(lt[property]['gc']);
 	    }
 	}
-	console.log(lt);
 
 	//convert lt to an object array
 	ltData = [];
@@ -168,7 +171,7 @@ d3.csv(dataUrl).then(function(data) {
 
 	//sort teams by pts
 	ltData.sort(function(a, b) {
-  	return b.pts - a.pts;
+  	return b.pts - a.pts || b.gd - a.gd;
 	});
 	console.log(ltData);
 
@@ -247,5 +250,4 @@ d3.selectAll('.tab-toggle button').on('click', function(d) {
 		d3.select('.game-day-tab').classed('d-none', true);
 		d3.select('.league-table-tab').classed('d-none', false);
 	}
-	console.log(d3.select(this).classed('game-day'))
 });
