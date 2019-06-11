@@ -28,7 +28,7 @@ d3.csv(dataUrl).then(function(data) {
 		.append('h5')
 		.attr('class', 'mb-0 text-center text-primary')
 		.append('button')
-		.attr('class', 'btn btn-link')
+		.attr('class', 'btn btn-link font-weight-bold')
 		.attr('type', 'button')
 		.attr('data-toggle', 'collapse')
 		.attr('data-target', function(d, i) {
