@@ -59,6 +59,10 @@ footer {
   margin-bottom: 15px;
 }
 
+.league-table-tab {
+  text-align: right;
+}
+
 .loader {
   margin-top: 200px;
 }

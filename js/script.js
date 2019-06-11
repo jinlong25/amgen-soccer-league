@@ -183,7 +183,7 @@ d3.csv(dataUrl).then(function(data) {
 		.append('tr');
 
 	rows.append('th')
-		.attr('class', 'font-weight-normal')
+		.attr('class', 'font-weight-normal text-left')
 		.html(function(d) {
 			return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + d.team+ '.png"></span>' + d.team;
 		});
