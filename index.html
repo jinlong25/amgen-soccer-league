@@ -24,20 +24,18 @@
 
   <!-- Page Content -->
   <div class="container">
-    <h6 class="text-secondary text-right updated">Updated: 6/19/19</h1>
+    <div class="loader text-center">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <h6 class="text-secondary text-right updated d-none">Updated: Jun. 11, 2019</h1>
     <div class="row">
-      <div class="col-lg-12 text-center tab-toggle">
+      <div class="col-lg-12 text-center tab-toggle d-none">
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary game-day">Game Day</button>
           <button type="button" class="btn btn-secondary league-table">League Table</button>
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-lg-12 text-center">
-        <h3 class="mt-5 text-dark">Game Schedule</h1>
-      </div>
-    </div> -->
 
     <!-- ACCORDION START-->
     <div class="accordion game-day-tab" id="gameResults">
@@ -45,17 +43,33 @@
     </div>
     <!-- ACCORDION END-->
 
-    <table class="table table-sm league-table-tab d-none">
+    <table class="table table-sm league-table-tab d-none table-striped">
       <thead>
-        <th>Team</th>
-        <th>GP</th>
-        <th>W</th>
-        <th>D</th>
-        <th>L</th>
-        <th>GS</th>
-        <th>GC</th>
-        <th>GD</th>
-        <th>Pts</th>
+        <th class="text-center">Team</th>
+        <th data-toggle="tooltip" data-placement="top" title="Games Played">
+          GP
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Wins">
+          W
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Draws">
+          D
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Losts">
+          L
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Goals Scored">
+          GS
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Goals Conceded">
+          GC
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Goals Difference">
+          GD
+        </th>
+        <th data-toggle="tooltip" data-placement="top" title="Points">
+          Pts
+        </th>
       </thead>
 
       <tbody>
@@ -63,8 +77,8 @@
     </table>
   </div>
 
-  <footer>
-    <p class="text-center"> Contact: jinlong.yang@amgen.com </p>
+  <footer class="d-none">
+    <p class="text-right">Contact: jinlong.yang@amgen.com</p>
   </footer>
 
   <!-- Bootstrap core JavaScript -->
@@ -76,6 +90,16 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
   <script src="js/script.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141821373-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-141821373-1');
+  </script>
 
 </body>
 
