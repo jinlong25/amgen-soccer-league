@@ -23,10 +23,12 @@ d3.csv(dataUrl).then(function(data) {
 	var cardHeaders = cards.append('div')
 		.attr('class', 'card-header')
 		.attr('id', function(d, i) {
-			if (d.game_type === 'season') {
+			console.log(d.values[0].game_type);
+			if (d.values[0].game_type === 'season') {
 				return 'gameDay' + (nested.length - i);
 			} else {
-				return d.game_type;
+				console.log(d.values[0].game_type);
+				return d.values[0].game_type;
 			}
 		})
 		.append('h5')
@@ -42,7 +44,12 @@ d3.csv(dataUrl).then(function(data) {
 		.attr('aria-expanded', 'true')
 		.html(function(d, i) {
 			// return 'Game Day ' + (nested.length - i) + ' - ' + d.key;
-			return 'Game Day ' + (i+1) + ' - ' + d.key;
+			if (d.values[0].game_type === 'season') {
+				return 'Game Day ' + (i+1) + ' - ' + d.key;
+			} else {
+				return d.values[0].game_type;
+			}
+			//return 'Game Day ' + (i+1) + ' - ' + d.key;
 		});
 
 	var cardBodies = cards.append('div')
@@ -65,7 +72,14 @@ d3.csv(dataUrl).then(function(data) {
 
 	games.append('td')
 		.attr('class', 'text-right col-5')
-		.html(function(g) { return g.home + '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.home + '.png"></span>'; });
+		.html(function(g) {
+			console.log(g.home);
+			if (g.home === 'TBD') {
+				return g.home;
+			} else {
+				return g.home + '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.home + '.png"></span>';
+			}
+			});
 		// .html(function(g) { return g.home + '<span><img src="/img/' + g.home + '.png"></span>'; });
 
 
@@ -82,7 +96,13 @@ d3.csv(dataUrl).then(function(data) {
 
 	games.append('td')
 		.attr('class', 'text-left col-5')
-		.html(function(g) { return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>' + g.away; });
+		.html(function(g) {
+			if (g.away === 'TBD') {
+				return g.away;
+			} else {
+				return g.away + '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>';
+			}
+		});
 
 
 
@@ -177,7 +197,7 @@ d3.csv(dataUrl).then(function(data) {
 	ltData.sort(function(a, b) {
   	return b.pts - a.pts || b.gd - a.gd;
 	});
-	console.log(ltData);
+	//console.log(ltData);
 
 	//populate league table
 	var rows = d3.select('.league-table-tab tbody')
