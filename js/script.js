@@ -1,7 +1,7 @@
 var dataUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR9qGeumntFjt6wEd6hgT2ZaLbhhYkfdXBbIx_iriMrVTznvcUP6TT-9PMuZ0GD0uu96q7mX4rup0Xj/pub?gid=0&single=true&output=csv'
 
 d3.csv(dataUrl).then(function(data) {
-	
+
 	//show hidden components after data return
 	d3.select('.updated').classed('d-none', false);
 	d3.select('.tab-toggle').classed('d-none', false);
@@ -23,7 +23,11 @@ d3.csv(dataUrl).then(function(data) {
 	var cardHeaders = cards.append('div')
 		.attr('class', 'card-header')
 		.attr('id', function(d, i) {
-			return 'gameDay' + (nested.length - i);
+			if (d.game_type === 'season') {
+				return 'gameDay' + (nested.length - i);
+			} else {
+				return d.game_type;
+			}
 		})
 		.append('h5')
 		.attr('class', 'mb-0 text-center text-primary')
