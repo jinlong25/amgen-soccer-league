@@ -23,11 +23,9 @@ d3.csv(dataUrl).then(function(data) {
 	var cardHeaders = cards.append('div')
 		.attr('class', 'card-header')
 		.attr('id', function(d, i) {
-			console.log(d.values[0].game_type);
 			if (d.values[0].game_type === 'season') {
 				return 'gameDay' + (nested.length - i);
 			} else {
-				console.log(d.values[0].game_type);
 				return d.values[0].game_type;
 			}
 		})
@@ -73,7 +71,6 @@ d3.csv(dataUrl).then(function(data) {
 	games.append('td')
 		.attr('class', 'text-right col-5')
 		.html(function(g) {
-			console.log(g.home);
 			if (g.home === 'TBD') {
 				return g.home;
 			} else {
@@ -100,7 +97,7 @@ d3.csv(dataUrl).then(function(data) {
 			if (g.away === 'TBD') {
 				return g.away;
 			} else {
-				return g.away + '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>';
+				return '<span><img src="https://github.com/jinlong25/amgen-soccer-league/raw/master/img/' + g.away + '.png"></span>' + g.away;
 			}
 		});
 
