@@ -194,7 +194,9 @@ d3.csv(dataUrl).then(function(data) {
 	ltData.sort(function(a, b) {
   	return b.pts - a.pts || b.gd - a.gd;
 	});
-	//console.log(ltData);
+
+	//remove last TBD from ltData
+	ltData.pop();
 
 	//populate league table
 	var rows = d3.select('.league-table-tab tbody')
