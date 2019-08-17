@@ -47,7 +47,7 @@ d3.csv(dataUrl).then(function(data) {
 			if (d.values[0].game_type === 'season') {
 				return 'Game Day ' + (i+1) + ' - ' + d.key;
 			} else {
-				return d.values[0].game_type;
+				return d.values[0].game_type + ' - ' + d.key;
 			}
 			//return 'Game Day ' + (i+1) + ' - ' + d.key;
 		});
