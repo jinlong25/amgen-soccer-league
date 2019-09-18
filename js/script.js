@@ -137,7 +137,7 @@ d3.csv(dataUrl).then(function(data) {
 	//calculate gs, gc
 	data.forEach(function(d) {
 		//gp, gs, gc
-		if (d.home_goal !== '') {
+		if (d.home_goal !== '' && d.game_type === 'season') {
 			lt[d.home]['gp'] += 1;
 			lt[d.away]['gp'] += 1;
 
