@@ -171,6 +171,9 @@ d3.csv(dataUrl).then(function(data) {
 	    }
 	}
 
+	//remove TBD
+	delete lt.TBD;
+
 	//convert lt to an object array
 	ltData = [];
 	for (var property in lt) {
@@ -192,11 +195,13 @@ d3.csv(dataUrl).then(function(data) {
 
 	//sort teams by pts
 	ltData.sort(function(a, b) {
-  	return b.pts - a.pts || b.gd - a.gd;
+  		return b.pts - a.pts || b.gd - a.gd;
 	});
 
 	//remove last TBD from ltData
-	ltData.pop();
+	// ltData.pop();
+	// ltData.pop();
+	
 
 	//populate league table
 	var rows = d3.select('.league-table-tab tbody')
